@@ -1,5 +1,5 @@
 import React from "react";
-import Banner from "./images/banner3.jpg";
+import Banner from "../images/banner3.jpg";
 import { BiChevronDown } from "react-icons/bi";
 
 const Hero = () => {

@@ -1,4 +1,4 @@
-import Logo from "./images/logo.png";
+import Logo from "../images/logo.png";
 import { BiChevronDown } from "react-icons/bi";
 import { BsCart3 } from "react-icons/bs";
 
