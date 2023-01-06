@@ -7,7 +7,7 @@ const ColumnSection = () => {
         Why HelloFresh?
       </h2>
 
-      <div className="grid grid-rows-4 md:grid-rows-1 grid-flow-col box-border items-baseline basis-0 justify-self-center content-between align-middle">
+      <div className="grid grid-rows-4 md:grid-rows-1 grid-flow-col max-w-[1140px] m-auto gap-20 basis-0 justify-self-center content-between align-middle">
         <div className="flex flex-col items-center text-center">
           <div className="mb-[20px] max-w-[181px]">
             <img
@@ -67,7 +67,7 @@ const ColumnSection = () => {
         </div>
       </div>
       <div className="flex flex-col items-center mt-[24px] m-auto">
-        <button className="rounded text-[16px] bg-[#067a46] text-[#ffffff] pointer py-3 px-6 font-normal">
+        <button className="rounded text-[16px] bg-[#067a46] text-[#ffffff] pointer py-3 px-6 font-normal hover:bg-[#056835]">
           Get started
         </button>
       </div>
