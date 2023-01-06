@@ -6,6 +6,7 @@ import FlexiblePlans from "./FlexiblePlans";
 import WhatsInTheBox from "./WhatsInTheBox";
 import Questions from "./Questions";
 import LargeFooter from "./LargeFooter";
+import Footer from "./Footer";
 
 const Homepage = () => {
   return (
@@ -17,6 +18,7 @@ const Homepage = () => {
       <FlexiblePlans />
       <Questions />
       <LargeFooter />
+      <Footer />
     </div>
   );
 };
