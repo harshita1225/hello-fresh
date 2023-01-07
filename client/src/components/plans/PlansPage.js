@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import ProgressBar from "./ProgressBar";
-import plan1 from "../images/plan1.png";
+import plan11 from "../images/plan11.png";
 import plan2 from "../images/plan2.png";
 import plan3 from "../images/plan3.png";
 import plan4 from "../images/plan4.png";
@@ -15,20 +15,29 @@ import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import { AiOutlineTag } from "react-icons/ai";
 import trustpilot from "../images/trustpilot.png";
+import QuestionPart from "../homepage/QuestionPart";
+
 const PlansPage = () => {
-  const [selectplan, setSelectPlan] = useState({
-    id: "",
+  const [selectplan, setSelectPlan] = useState(false);
+
+  const [plan, setPlan] = useState({
+    planname: "",
+    numberPeople: 0,
+    RecipeWeek: 0,
   });
 
-  const [handleSelect, setHandleSelect] = useState(false);
-
+  const handlePlanSelection = (val) => {
+    setPlan({ ...plan, planname: val });
+    setSelectPlan(!selectplan);
+  };
+  console.log(plan);
   return (
     <div>
       <div>
         <ProgressBar />
         <div className="w-screen">
           <div className="w-[1200px] py-[32px] px-[40px] border-2 bg-white mx-auto">
-            <div className="w-[1064px] h-[733px] mx-auto">
+            <div className="w-[1064px] h-[773px] mx-auto">
               <div className="text-[32px] text-[#242424] mb-5">
                 Personalize your plan
               </div>
@@ -45,36 +54,68 @@ const PlansPage = () => {
                     </p>
                     <div className="w-[467px]">
                       <div className="flex justify-between ">
-                        <div
-                          onClick={() => {
-                            setSelectPlan({ id: true });
-                          }}
-                          className="w-[228px] h-[115px] border-2 border-gray-300 rounded-sm flex justify-center items-center bg-white"
+                        <button
+                          value="Meat and veggies"
+                          className="w-[228px] h-[115px] border-2 border-gray-300 rounded-sm flex justify-center items-center bg-gray-100"
+                          onClick={(e) => handlePlanSelection(e.target.value)}
                         >
                           {selectplan && (
-                            <BsFillCheckCircleFill className="relative bottom-9 left-50 text-[1.5rem] text-[#067A46]" />
+                            <BsFillCheckCircleFill className="relative bottom-[2rem] left-[-2rem] text-[-2rem] text-[#067A46]" />
                           )}
-                          <img src={plan1} alt="plan1" />
-                        </div>
-                        <div className="w-[228px] h-[115px] border-2  border-gray-300 rounded-sm flex justify-center items-center bg-gray-100">
+
+                          <img src={plan11} alt="plan11" />
+                        </button>
+                        <button
+                          onClick={() => setSelectPlan(!selectplan)}
+                          className="w-[228px] h-[115px] border-2  border-gray-300 rounded-sm flex justify-center items-center bg-gray-100"
+                        >
+                          {selectplan && (
+                            <BsFillCheckCircleFill className="relative bottom-[2rem] left-[-2rem] text-[-2rem] text-[#067A46]" />
+                          )}
+
                           <img src={plan2} alt="plan2" />
-                        </div>
+                        </button>
                       </div>
                       <div className="flex justify-between mt-2">
-                        <div className="w-[228px] h-[115px] border-2 border-gray-300 rounded-sm flex justify-center items-center bg-gray-100">
+                        <button
+                          onClick={() => setSelectPlan(!selectplan)}
+                          className="w-[228px] h-[115px] border-2 border-gray-300 rounded-sm flex justify-center items-center bg-gray-100"
+                        >
+                          {selectplan && (
+                            <BsFillCheckCircleFill className="relative bottom-[2rem] left-[-2rem] text-[-2rem] text-[#067A46]" />
+                          )}
                           <img src={plan3} alt="plan3" />
-                        </div>
-                        <div className="w-[228px] h-[115px] border-2  border-gray-300 rounded-sm flex justify-center items-center bg-gray-100">
+                        </button>
+                        <button
+                          onClick={() => setSelectPlan(!selectplan)}
+                          className="w-[228px] h-[115px] border-2  border-gray-300 rounded-sm flex justify-center items-center bg-gray-100"
+                        >
+                          {selectplan && (
+                            <BsFillCheckCircleFill className="relative bottom-[2rem] left-[-2rem] text-[-2rem] text-[#067A46]" />
+                          )}
                           <img src={plan4} alt="plan4" />
-                        </div>
+                        </button>
                       </div>
                       <div className="flex justify-between mt-2">
-                        <div className="w-[228px] h-[115px] border-2 border-gray-300 rounded-sm flex justify-center items-center bg-gray-100">
+                        <button
+                          onClick={() => setSelectPlan(!selectplan)}
+                          className="w-[228px] h-[115px] border-2 border-gray-300 rounded-sm flex justify-center items-center bg-gray-100"
+                        >
+                          {selectplan && (
+                            <BsFillCheckCircleFill className="relative bottom-[2rem] left-[-2rem] text-[-2rem] text-[#067A46]" />
+                          )}
                           <img src={plan5} alt="plan5" />
-                        </div>
-                        <div className="w-[228px] h-[115px] border-2  border-gray-300 rounded-sm flex justify-center items-center bg-gray-100">
+                        </button>
+                        <button
+                          onClick={() => setSelectPlan(!selectplan)}
+                          className="w-[228px] h-[115px] border-2  border-gray-300 rounded-sm flex justify-center items-center bg-gray-100"
+                        >
+                          {" "}
+                          {selectplan && (
+                            <BsFillCheckCircleFill className="relative bottom-[2rem] left-[-2rem] text-[-2rem] text-[#067A46]" />
+                          )}
                           <img src={plan6} alt="plan6" />
-                        </div>
+                        </button>
                       </div>
                     </div>
                     <p className="text-[16px] text-[#242424] mt-8">
@@ -92,10 +133,7 @@ const PlansPage = () => {
                     <div className=" w-[444px] h-[56px] flex justify-between items-center text-[16px]">
                       <p>Number of people</p>
                       <div>
-                        <button
-                          onclick={handleSelect}
-                          className="w-[135px] h-[40px] border-2 border-[#067A46] rounded-l-md text-[#067A46] text-[16px] hover:bg-[#d0ee98]"
-                        >
+                        <button className="w-[135px] h-[40px] border-2 border-[#067A46] rounded-l-md text-[#067A46] text-[16px] hover:bg-[#d0ee98]">
                           2
                         </button>
                         <button className="w-[135px] h-[40px] ml-[-15px] border-[#067A46] border-y-2 border-r-2   text-[#067A46] text-[16px] hover:bg-[#d0ee98] rounded-r-md">
@@ -106,10 +144,7 @@ const PlansPage = () => {
                     <div className=" w-[444px] h-[56px] flex justify-between items-center text-[16px]">
                       <p>Recipes per week</p>
                       <div>
-                        <button
-                          onclick={handleSelect}
-                          className="w-[53px] h-[40px] border-2 border-[#067A46] rounded-l-md  text-[#067A46] text-[16px] hover:bg-[#d0ee98]"
-                        >
+                        <button className="w-[53px] h-[40px] border-2 border-[#067A46] rounded-l-md  text-[#067A46] text-[16px] hover:bg-[#d0ee98]">
                           2
                         </button>
                         <button className="w-[53px] h-[40px] border-y-2 border-[#067A46]    text-[#067A46] text-[16px] hover:bg-[#d0ee98]">
@@ -182,7 +217,7 @@ const PlansPage = () => {
                 NEW!
               </p>
               <p className="text-[32px]">Make it your own with HelloCustom</p>
-              <p className="text-[16px]">
+              <p className=" text-[16px]">
                 Now included in all plans. Change, swap, or upgrade 12+ sides
                 and proteins each week. Your flavors, your choice, your recipes.
               </p>
@@ -190,9 +225,9 @@ const PlansPage = () => {
                 Dig into a few HelloCustom examples below.
               </p>
               <div className="flex justify-center gap-3">
-                <div className="w-[272px] h-[315px] ">
+                <div className="w-[292px] h-[315px] ">
                   <img
-                    className="w-[272px] h-[315px] rounded-xl"
+                    className="w-[292px] h-[315px] rounded-xl"
                     src="https://insanelygoodrecipes.com/wp-content/uploads/2021/04/Chicken-Tabbouleh-with-Quinoa-Tomatoes-and-Cucumber-683x1024.webp"
                     alt="dish1"
                   />
@@ -203,15 +238,15 @@ const PlansPage = () => {
                     {" "}
                     hummus & couscous power bowls
                   </p>
-                  <div className="w-[3rem] rounded-full relative bottom-[380px] left-[200px] text-[3rem] font-bold bg-[#067A46] text-white animate-pulse">
+                  <div className="w-[3rem] rounded-full relative bottom-[380px] left-[220px] text-[3rem] font-bold bg-[#067A46] text-white animate-pulse">
                     {" "}
                     <BsArrowRepeat />
                   </div>
                 </div>
 
-                <div className="w-[272px] h-[315px]">
+                <div className="w-[292px] h-[315px]">
                   <img
-                    className="w-[272px] h-[315px] rounded-xl"
+                    className="w-[292px] h-[315px] rounded-xl"
                     src="https://www.thespruceeats.com/thmb/KNqfHZiCEGAvD1A6mfOr4yXzHh4=/1000x1000/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/Hello-Fresh-Creamy-Chive-Chicken-5-05a1959f03a44112a423997547b098dd.jpg"
                     alt="dish1"
                   />
@@ -221,27 +256,27 @@ const PlansPage = () => {
                   <p className="text-white bg-[#067a46] rounded-b-xl relative bottom-20 font-bold text-[14px]">
                     sides with rice & beans
                   </p>
-                  <div className="w-[3rem] rounded-full relative bottom-[380px] left-[200px] text-[3rem] font-bold bg-[#067A46] text-white animate-pulse">
+                  <div className="w-[3rem] rounded-full relative bottom-[380px] left-[220px] text-[3rem] font-bold bg-[#067A46] text-white animate-pulse">
                     {" "}
                     <BsArrowRepeat />
                   </div>
                 </div>
 
-                <div className="w-[272px] h-[315px] rounded-xl">
+                <div className="w-[292px] h-[315px] rounded-xl">
                   <img
-                    className="w-[272px] h-[315px] rounded-xl"
+                    className="w-[292px] h-[315px] rounded-xl"
                     src="https://cdn.hellofresh.com/us/landing-pages/meal-kit-delivery/Ginger-Lime-Salmon.jpg"
                     alt="dish3"
                   />
                   <p className="text-white bg-[#067a46] relative bottom-20 font-bold text-[20px]">
                     {" "}
-                    Cheesy Onion Crunch Chicken
+                    Cheesy Onion Crunch Chicken with Rice
                   </p>
                   <p className="text-white bg-[#067a46] relative bottom-20 font-bold text-[14px] rounded-b-xl">
                     {" "}
-                    sides with rice and broccoli
+                    sides with steamed broccoli
                   </p>
-                  <div className="w-[3rem] rounded-full relative bottom-[380px] left-[200px] text-[3rem] font-bold bg-[#067A46] text-white animate-pulse">
+                  <div className="w-[3rem] rounded-full relative bottom-[380px] left-[220px] text-[3rem] font-bold bg-[#067A46] text-white animate-pulse">
                     {" "}
                     <BsArrowRepeat />
                   </div>
@@ -262,14 +297,16 @@ const PlansPage = () => {
                     Apply
                   </Button>
                 </div>
-                <div className="tracking-widest bg-[#d0ee98] py-1 flex justify-center items-center rounded-2xl ">
-                  <span className="mr-3">
-                    <AiOutlineTag className="text-[1.5rem] " />
-                  </span>
-                  <p>Special discount for heroes! Get the offer</p>
+                <div className="tracking-widest  py-1 flex justify-center items-center rounded-2xl ">
+                  <div className="bg-[#d0ee98] flex rounded-xl px-5 py-1">
+                    <span className="mr-3">
+                      <AiOutlineTag className="text-[1.5rem] " />
+                    </span>
+                    <p>Special discount for heroes! Get the offer</p>
+                  </div>
                 </div>
               </div>
-
+              <QuestionPart />
               <div className="w-[800px] mt-20 mx-auto ">
                 <p className="text-[32px] mb-2">Stay updated</p>
                 <p className="text-[16px] mb-8">

@@ -57,14 +57,14 @@ const Register = () => {
     <>
       <ProgressBar />
       <div className="w-screen h-screen flex justify-center ">
-        <div className=" h-[700px] bg-gray-100 rounded-2xl py-10">
+        <div className=" h-[800px] bg-gray-100 rounded-2xl py-10 ">
           <div className="w-[1112px]  flex-col justify-center font-sans">
             <h3 className=" text-[20px] mb-3">Shipping Information</h3>
             <div>
-              <h4 className=" text-[16px] mb-5 font-semibold">
+              <h4 className=" text-[16px] mb-10 font-semibold">
                 Delivery Address
               </h4>
-              <div>
+              <div className="mb-10">
                 <Box
                   component="form"
                   sx={{
@@ -171,7 +171,7 @@ const Register = () => {
                 apply, and that I may opt out at any time by texting STOP.
               </p>
             </div>
-            <div className="w-[1000px] flex justify-around mx-auto">
+            <div className="w-[1000px] flex justify-around mx-auto py-5">
               <div className="flex justify-center items-center">
                 <img
                   className="w-[65px] mr-2"
