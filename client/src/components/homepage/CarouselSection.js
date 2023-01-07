@@ -1,7 +1,12 @@
 import React from "react";
+import CarouselMenu from "./CarouselMenu";
 
 const CarouselSection = () => {
-  return <div>CarouselSection</div>;
+  return (
+    <div>
+      <CarouselMenu />
+    </div>
+  );
 };
 
 export default CarouselSection;

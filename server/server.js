@@ -8,8 +8,6 @@ dbConnect(); // connects to db
 
 app.use(express.json()); // needed to parse the body of the request
 
-//app.use('/users', require('./routes/userRoutes'))
-
 app.get("/", (req, res) => {
   console.log("Hello from route");
 
