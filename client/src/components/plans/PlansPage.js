@@ -15,10 +15,11 @@ import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import { AiOutlineTag } from "react-icons/ai";
 import trustpilot from "../images/trustpilot.png";
-import QuestionPart from "../homepage/QuestionPart";
+import QuestionPart from "../plans/QuestionPart";
 
 const PlansPage = () => {
-  const [selectplan, setSelectPlan] = useState(false);
+  const [select, setSelect] = useState(false);
+  const [selectId, setSelectId] = useState({ id: "" });
 
   const [plan, setPlan] = useState({
     planname: "",
@@ -28,9 +29,10 @@ const PlansPage = () => {
 
   const handlePlanSelection = (val) => {
     setPlan({ ...plan, planname: val });
-    setSelectPlan(!selectplan);
+    setSelect(!select);
   };
-  console.log(plan);
+
+  console.log(select, selectId);
   return (
     <div>
       <div>
@@ -59,17 +61,17 @@ const PlansPage = () => {
                           className="w-[228px] h-[115px] border-2 border-gray-300 rounded-sm flex justify-center items-center bg-gray-100"
                           onClick={(e) => handlePlanSelection(e.target.value)}
                         >
-                          {selectplan && (
+                          {select && (
                             <BsFillCheckCircleFill className="relative bottom-[2rem] left-[-2rem] text-[-2rem] text-[#067A46]" />
                           )}
 
                           <img src={plan11} alt="plan11" />
                         </button>
                         <button
-                          onClick={() => setSelectPlan(!selectplan)}
+                          onClick={() => setSelect(!select)}
                           className="w-[228px] h-[115px] border-2  border-gray-300 rounded-sm flex justify-center items-center bg-gray-100"
                         >
-                          {selectplan && (
+                          {select && (
                             <BsFillCheckCircleFill className="relative bottom-[2rem] left-[-2rem] text-[-2rem] text-[#067A46]" />
                           )}
 
@@ -78,19 +80,19 @@ const PlansPage = () => {
                       </div>
                       <div className="flex justify-between mt-2">
                         <button
-                          onClick={() => setSelectPlan(!selectplan)}
+                          onClick={() => setSelect(!select)}
                           className="w-[228px] h-[115px] border-2 border-gray-300 rounded-sm flex justify-center items-center bg-gray-100"
                         >
-                          {selectplan && (
+                          {select && (
                             <BsFillCheckCircleFill className="relative bottom-[2rem] left-[-2rem] text-[-2rem] text-[#067A46]" />
                           )}
                           <img src={plan3} alt="plan3" />
                         </button>
                         <button
-                          onClick={() => setSelectPlan(!selectplan)}
+                          onClick={() => setSelect(!select)}
                           className="w-[228px] h-[115px] border-2  border-gray-300 rounded-sm flex justify-center items-center bg-gray-100"
                         >
-                          {selectplan && (
+                          {select && (
                             <BsFillCheckCircleFill className="relative bottom-[2rem] left-[-2rem] text-[-2rem] text-[#067A46]" />
                           )}
                           <img src={plan4} alt="plan4" />
@@ -98,20 +100,20 @@ const PlansPage = () => {
                       </div>
                       <div className="flex justify-between mt-2">
                         <button
-                          onClick={() => setSelectPlan(!selectplan)}
+                          onClick={() => setSelect(!select)}
                           className="w-[228px] h-[115px] border-2 border-gray-300 rounded-sm flex justify-center items-center bg-gray-100"
                         >
-                          {selectplan && (
+                          {select && (
                             <BsFillCheckCircleFill className="relative bottom-[2rem] left-[-2rem] text-[-2rem] text-[#067A46]" />
                           )}
                           <img src={plan5} alt="plan5" />
                         </button>
                         <button
-                          onClick={() => setSelectPlan(!selectplan)}
+                          onClick={() => setSelect(!select)}
                           className="w-[228px] h-[115px] border-2  border-gray-300 rounded-sm flex justify-center items-center bg-gray-100"
                         >
                           {" "}
-                          {selectplan && (
+                          {select && (
                             <BsFillCheckCircleFill className="relative bottom-[2rem] left-[-2rem] text-[-2rem] text-[#067A46]" />
                           )}
                           <img src={plan6} alt="plan6" />
@@ -133,10 +135,31 @@ const PlansPage = () => {
                     <div className=" w-[444px] h-[56px] flex justify-between items-center text-[16px]">
                       <p>Number of people</p>
                       <div>
-                        <button className="w-[135px] h-[40px] border-2 border-[#067A46] rounded-l-md text-[#067A46] text-[16px] hover:bg-[#d0ee98]">
+                        <button
+                          onClick={() => {
+                            setSelectId({ id: "p1" });
+                            setSelect(!select);
+                          }}
+                          className={`w-[135px] h-[40px] border-2 border-[#067A46] text-[16px]  ${
+                            selectId === "p1" && select
+                              ? "bg-[#056835] text-white font-bold rounded-md"
+                              : "bg-white text-[#067A46] rounded-l-md hover:bg-[#d0ee98]"
+                          }`}
+                        >
                           2
                         </button>
-                        <button className="w-[135px] h-[40px] ml-[-15px] border-[#067A46] border-y-2 border-r-2   text-[#067A46] text-[16px] hover:bg-[#d0ee98] rounded-r-md">
+                        <button
+                          onClick={() => {
+                            setSelectId({ id: "p2" });
+                            setSelect(!select);
+                          }}
+                          className={`w-[135px] h-[40px] ml-[-15px] border-[#067A46] border-2 text-[16px]
+                        ${
+                          selectId === "p2" && select
+                            ? "bg-[#056835] text-white font-bold rounded-md"
+                            : "bg-white text-[#067A46] rounded-r-md hover:bg-[#d0ee98]"
+                        }`}
+                        >
                           4
                         </button>
                       </div>
