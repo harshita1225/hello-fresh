@@ -3,7 +3,7 @@ import React from "react";
 const ColumnSection = () => {
   return (
     <div className="box-border border-b divide-[#EEEEEE] pb-[32px]  bg-[#f8f8f8] text-[#242424]">
-      <h2 className="text-center text-[32px] font-light leading-[38px] pt-[40px] pb-[30px] px-[10px]">
+      <h2 className="text-center text-[32px] font-normal leading-[38px] pt-[40px] pb-[30px] px-[10px]">
         Why HelloFresh?
       </h2>
 

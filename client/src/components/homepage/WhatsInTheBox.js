@@ -38,7 +38,9 @@ const WhatsInTheBox = () => {
             <p className="text-[#067A46] cursor-pointer">
               ✓
               <span className="underline">
-                Innovative packaging designed to reduce waste
+                <a href="https://www.hellofresh.com/about/sustainability/packaging">
+                  Innovative packaging designed to reduce waste
+                </a>{" "}
               </span>
               <br />
             </p>
