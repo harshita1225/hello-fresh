@@ -28,6 +28,17 @@
   color: #61dafb;
 }
 
+.slick-arrow {
+  background-color: green;
+  border: 1px solid green;
+  border-radius: 50%;
+}
+.slick-arrow:hover {
+  background-color: green;
+  border: 1px solid green;
+  border-radius: 50%;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

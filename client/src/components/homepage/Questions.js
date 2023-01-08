@@ -3,7 +3,7 @@ import { BiChevronDown } from "react-icons/bi";
 
 const Questions = () => {
   return (
-    <div className="bg-[#F8F8F8] h-[776px] flex flex-col">
+    <div className="bg-[#F8F8F8] h-[776px] flex flex-col border-b-[1px] border-[#e0dbdb]">
       <h1 className="text-[40px] pt-[30px]">More questions?</h1>
       <div className="flex pt-[35px] justify-center ml-[-520px]">
         <ul>
