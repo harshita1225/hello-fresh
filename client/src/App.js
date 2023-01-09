@@ -6,6 +6,7 @@ import PaymentPage from "./components/plans/PaymentPage";
 import Homepage from "./components/homepage/Homepage";
 import PlansPage from "./components/plans/PlansPage";
 import Testtoggle from "./components/plans/Testtoggle";
+import MenusPage from "./components/menuspage/MenusPage";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route path="/" element={<Homepage />} />
           <Route path="/plans" element={<PlansPage />} />
           <Route path="/test" element={<Testtoggle />} />
+          <Route path="/menus" element={<MenusPage />} />
         </Routes>
       </BrowserRouter>
     </div>
