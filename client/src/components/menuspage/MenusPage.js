@@ -48,7 +48,7 @@ const MenusPage = () => {
 
       {/* Recipe Grid Section */}
 
-      <div className="flex flex-row px-[16px] mx-auto max-w-[1140px] gap-[16px] mb-[20px]">
+      <div className="flex flex-row px-[16px] mx-auto max-w-[1140px] gap-[18px] mb-[20px]">
         <RecipeCard
           image="https://img.hellofresh.com/w_1920,q_auto,f_auto,c_limit,fl_lossy/c_fill,f_auto,fl_lossy,h_432,q_auto/hellofresh_s3/image/638f7b103a3d01b427029aa9-41907f01.jpg"
           title="Chicken Sausage Rigatoni"
@@ -123,7 +123,7 @@ const MenusPage = () => {
 
       {/* Sticky button */}
 
-      <div className="items-center p-[16px] m-auto sticky text-center top-0">
+      <div className="items-center p-[16px] m-auto sticky text-center border-t-[2px] divide-[#e4e4e4] bg-[#FFFFFF]">
         <button className="rounded text-[16px] bg-[#067a46] text-[#ffffff] pointer py-3 px-6 font-normal hover:bg-[#056835]">
           Get cooking
         </button>
