@@ -1,6 +1,6 @@
 import React from "react";
 
-const MenuCard = (props) => {
+const RecipeCard = (props) => {
   return (
     <div className="h-[336px] w-[358px] overflow-hidden shadow-md bg-white text-[#242424] relative box-border cursor-pointer hover:shadow-xl">
       <img
@@ -27,7 +27,7 @@ const MenuCard = (props) => {
         <h4 className="text-[16px] mb-[4px] leading-6">{props.title}</h4>
         <p className="text-[14px] leading-5">{props.subtitle}</p>
 
-        <div className="flex flex-row max-w-[300px] mt-auto text-[14px] pt-6">
+        <div className="flex flex-row max-w-[300px] mt-auto text-[14px] pt-6 ">
           <p className="pr-[8px] color-[#242424] font-semibold border-r-[1px] border-r-[#E4E4E4]">
             {props.time} min
           </p>
@@ -38,4 +38,4 @@ const MenuCard = (props) => {
   );
 };
 
-export default MenuCard;
+export default RecipeCard;
