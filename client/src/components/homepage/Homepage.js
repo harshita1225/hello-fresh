@@ -8,7 +8,7 @@ import CarouselSection from "./CarouselSection";
 import Questions from "./Questions";
 import LargeFooter from "./LargeFooter";
 import Footer from "./Footer";
-import Instagram from "./Instagram";
+import InstagramSection from "./InstagramSection";
 
 const Homepage = () => {
   return (
@@ -18,7 +18,7 @@ const Homepage = () => {
       <ColumnSection />
       <WhatsInTheBox />
       <CarouselSection />
-      <Instagram />
+      <InstagramSection />
       <FlexiblePlans />
       <Questions />
       <LargeFooter />

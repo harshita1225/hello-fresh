@@ -5,6 +5,7 @@ import Address from "./components/plans/Address";
 import PaymentPage from "./components/plans/PaymentPage";
 import Homepage from "./components/homepage/Homepage";
 import PlansPage from "./components/plans/PlansPage";
+import MenusPage from "./components/menuspage/MenusPage";
 import Cart from "./components/plans/Cart";
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
           <Route path="/cart" element={<Cart />} />
           <Route path="/" element={<Homepage />} />
           <Route path="/plans" element={<PlansPage />} />
+          <Route path="/menus" element={<MenusPage />} />
         </Routes>
       </BrowserRouter>
     </div>
