@@ -200,11 +200,12 @@ const Address = () => {
                 </div>
               </div>
             </div>
-            <div className="mt-8 mb-5">
+            <div className="mt-[20px] mb-10">
               <Button
                 onClick={handleNext}
                 style={{
                   backgroundColor: "#067A46",
+                  width: "980px",
                 }}
                 variant="contained"
               >

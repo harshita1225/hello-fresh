@@ -16,23 +16,49 @@ import TextField from "@mui/material/TextField";
 import { AiOutlineTag } from "react-icons/ai";
 import trustpilot from "../images/trustpilot.png";
 import QuestionPart from "../plans/QuestionPart";
+import { useNavigate } from "react-router-dom";
 
 const PlansPage = () => {
-  const [select, setSelect] = useState(false);
-  const [selectId, setSelectId] = useState({ id: "" });
+  const navigate = useNavigate();
+  const [select, setSelect] = useState({ id: "" });
 
-  const [plan, setPlan] = useState({
-    planname: "",
-    numberPeople: 0,
-    RecipeWeek: 0,
+  const [NumRecp, setNumRecp] = useState({ id: "" });
+
+  const [selectPlan, setSelectPlan] = useState({
+    id1: false,
+    id2: false,
+    id3: false,
+    id4: false,
+    id5: false,
+    id6: false,
   });
 
-  const handlePlanSelection = (val) => {
-    setPlan({ ...plan, planname: val });
-    setSelect(!select);
+  const [plan, setPlan] = useState({
+    planname: [],
+    numberPeople: 0,
+    recipeWeek: 0,
+  });
+
+  const handlePlanSelection = (val, name) => {
+    setPlan({ ...plan, planname: [...plan.planname, val] });
+    setSelectPlan({ ...selectPlan, [name]: !selectPlan[name] });
   };
 
-  console.log(select, selectId);
+  const handleNumPeople = (val) => {
+    setPlan({ ...plan, numberPeople: val });
+    setSelect({ id: val });
+  };
+
+  const handleNumRecp = (val) => {
+    setPlan({ ...plan, recipeWeek: val });
+    setNumRecp({ id: val });
+  };
+
+  const handleNext = () => {
+    navigate("/address");
+  };
+
+  console.log(plan);
   return (
     <div>
       <div>
@@ -57,21 +83,28 @@ const PlansPage = () => {
                     <div className="w-[467px]">
                       <div className="flex justify-between ">
                         <button
+                          name="id1"
                           value="Meat and veggies"
                           className="w-[228px] h-[115px] border-2 border-gray-300 rounded-sm flex justify-center items-center bg-gray-100"
-                          onClick={(e) => handlePlanSelection(e.target.value)}
+                          onClick={(e) =>
+                            handlePlanSelection(e.target.value, e.target.name)
+                          }
                         >
-                          {select && (
+                          {selectPlan.id1 && (
                             <BsFillCheckCircleFill className="relative bottom-[2rem] left-[-2rem] text-[-2rem] text-[#067A46]" />
                           )}
 
                           <img src={plan11} alt="plan11" />
                         </button>
                         <button
-                          onClick={() => setSelect(!select)}
+                          name="id2"
+                          value="Veggie"
+                          onClick={(e) =>
+                            handlePlanSelection(e.target.value, e.target.name)
+                          }
                           className="w-[228px] h-[115px] border-2  border-gray-300 rounded-sm flex justify-center items-center bg-gray-100"
                         >
-                          {select && (
+                          {selectPlan.id2 && (
                             <BsFillCheckCircleFill className="relative bottom-[2rem] left-[-2rem] text-[-2rem] text-[#067A46]" />
                           )}
 
@@ -80,19 +113,27 @@ const PlansPage = () => {
                       </div>
                       <div className="flex justify-between mt-2">
                         <button
-                          onClick={() => setSelect(!select)}
+                          name="id3"
+                          value="Family Friendly"
+                          onClick={(e) =>
+                            handlePlanSelection(e.target.value, e.target.name)
+                          }
                           className="w-[228px] h-[115px] border-2 border-gray-300 rounded-sm flex justify-center items-center bg-gray-100"
                         >
-                          {select && (
+                          {selectPlan.id3 && (
                             <BsFillCheckCircleFill className="relative bottom-[2rem] left-[-2rem] text-[-2rem] text-[#067A46]" />
                           )}
                           <img src={plan3} alt="plan3" />
                         </button>
                         <button
-                          onClick={() => setSelect(!select)}
+                          name="id4"
+                          value="Fit and Wholesome"
+                          onClick={(e) =>
+                            handlePlanSelection(e.target.value, e.target.name)
+                          }
                           className="w-[228px] h-[115px] border-2  border-gray-300 rounded-sm flex justify-center items-center bg-gray-100"
                         >
-                          {select && (
+                          {selectPlan.id4 && (
                             <BsFillCheckCircleFill className="relative bottom-[2rem] left-[-2rem] text-[-2rem] text-[#067A46]" />
                           )}
                           <img src={plan4} alt="plan4" />
@@ -100,20 +141,27 @@ const PlansPage = () => {
                       </div>
                       <div className="flex justify-between mt-2">
                         <button
-                          onClick={() => setSelect(!select)}
+                          name="id5"
+                          value="Quick and Easy"
+                          onClick={(e) =>
+                            handlePlanSelection(e.target.value, e.target.name)
+                          }
                           className="w-[228px] h-[115px] border-2 border-gray-300 rounded-sm flex justify-center items-center bg-gray-100"
                         >
-                          {select && (
+                          {selectPlan.id5 && (
                             <BsFillCheckCircleFill className="relative bottom-[2rem] left-[-2rem] text-[-2rem] text-[#067A46]" />
                           )}
                           <img src={plan5} alt="plan5" />
                         </button>
                         <button
-                          onClick={() => setSelect(!select)}
+                          name="id6"
+                          value="Pescatarian"
+                          onClick={(e) =>
+                            handlePlanSelection(e.target.value, e.target.name)
+                          }
                           className="w-[228px] h-[115px] border-2  border-gray-300 rounded-sm flex justify-center items-center bg-gray-100"
                         >
-                          {" "}
-                          {select && (
+                          {selectPlan.id6 && (
                             <BsFillCheckCircleFill className="relative bottom-[2rem] left-[-2rem] text-[-2rem] text-[#067A46]" />
                           )}
                           <img src={plan6} alt="plan6" />
@@ -136,12 +184,13 @@ const PlansPage = () => {
                       <p>Number of people</p>
                       <div>
                         <button
-                          onClick={() => {
-                            setSelectId({ id: "p1" });
-                            setSelect(!select);
+                          value="2"
+                          onClick={(e) => {
+                            setPlan({ ...plan, numberPeople: e.target.value });
+                            setSelect({ id: "2" });
                           }}
                           className={`w-[135px] h-[40px] border-2 border-[#067A46] text-[16px]  ${
-                            selectId === "p1" && select
+                            select.id === "2"
                               ? "bg-[#056835] text-white font-bold rounded-md"
                               : "bg-white text-[#067A46] rounded-l-md hover:bg-[#d0ee98]"
                           }`}
@@ -149,15 +198,16 @@ const PlansPage = () => {
                           2
                         </button>
                         <button
-                          onClick={() => {
-                            setSelectId({ id: "p2" });
-                            setSelect(!select);
+                          value="4"
+                          onClick={(e) => {
+                            setPlan({ ...plan, numberPeople: e.target.value });
+                            setSelect({ id: "4" });
                           }}
-                          className={`w-[135px] h-[40px] ml-[-15px] border-[#067A46] border-2 text-[16px]
+                          className={`w-[135px] h-[40px]  ml-[-15px]  border-[#067A46] border-2 text-[16px]
                         ${
-                          selectId === "p2" && select
-                            ? "bg-[#056835] text-white font-bold rounded-md"
-                            : "bg-white text-[#067A46] rounded-r-md hover:bg-[#d0ee98]"
+                          select.id === "4"
+                            ? "bg-[#056835] text-white font-bold rounded-md "
+                            : "bg-white text-[#067A46] rounded-md hover:bg-[#d0ee98]"
                         }`}
                         >
                           4
@@ -167,19 +217,74 @@ const PlansPage = () => {
                     <div className=" w-[444px] h-[56px] flex justify-between items-center text-[16px]">
                       <p>Recipes per week</p>
                       <div>
-                        <button className="w-[53px] h-[40px] border-2 border-[#067A46] rounded-l-md  text-[#067A46] text-[16px] hover:bg-[#d0ee98]">
+                        <button
+                          value="2"
+                          onClick={(e) => {
+                            setPlan({ ...plan, recipeWeek: e.target.value });
+                            setNumRecp({ id: "2" });
+                          }}
+                          className={`w-[53px] h-[40px] border-2 border-[#067A46] rounded-l-md  text-[16px] ${
+                            NumRecp.id === "2"
+                              ? "bg-[#067A46] text-white font-bold rounded-md mr-[-3px]"
+                              : "text-[#067A46] bg-white hover:bg-[#d0ee98]"
+                          } `}
+                        >
                           2
                         </button>
-                        <button className="w-[53px] h-[40px] border-y-2 border-[#067A46]    text-[#067A46] text-[16px] hover:bg-[#d0ee98]">
+                        <button
+                          value="3"
+                          onClick={(e) => {
+                            setPlan({ ...plan, recipeWeek: e.target.value });
+                            setNumRecp({ id: "3" });
+                          }}
+                          className={`w-[53px] h-[40px] border-y-2 border-[#067A46] text-[16px] ${
+                            NumRecp.id === "3"
+                              ? " bg-[#067A46] text-white font-bold rounded-md scale-105"
+                              : "text-[#067A46] bg-white hover:bg-[#d0ee98]"
+                          }`}
+                        >
                           3
                         </button>
-                        <button className="w-[53px] h-[40px] border-2 border-[#067A46]   text-[#067A46] text-[16px] hover:bg-[#d0ee98]">
+                        <button
+                          value="4"
+                          onClick={(e) => {
+                            setPlan({ ...plan, recipeWeek: e.target.value });
+                            setNumRecp({ id: "4" });
+                          }}
+                          className={`w-[53px] h-[40px] border-2 border-[#067A46] text-[16px] ${
+                            NumRecp.id === "4"
+                              ? " bg-[#067A46] text-white font-bold rounded-md scale-105"
+                              : "text-[#067A46] bg-white hover:bg-[#d0ee98]"
+                          }`}
+                        >
                           4
                         </button>
-                        <button className="w-[53px] h-[40px] border-y-2 border-[#067A46]    text-[#067A46] text-[16px] hover:bg-[#d0ee98]">
+                        <button
+                          value="5"
+                          onClick={(e) => {
+                            setPlan({ ...plan, recipeWeek: e.target.value });
+                            setNumRecp({ id: "5" });
+                          }}
+                          className={`w-[53px] h-[40px] border-y-2 border-[#067A46] text-[16px] ${
+                            NumRecp.id === "5"
+                              ? " bg-[#067A46] text-white font-bold rounded-md scale-105"
+                              : "text-[#067A46] bg-white hover:bg-[#d0ee98]"
+                          }`}
+                        >
                           5
                         </button>
-                        <button className="w-[53px] h-[40px]  bg-[#067A46] border-2 border-[#067A46] rounded-r-md  text-[#067A46] text-[16px] hover:bg-[#d0ee98]">
+                        <button
+                          value="6"
+                          onClick={(e) => {
+                            setPlan({ ...plan, recipeWeek: e.target.value });
+                            setNumRecp({ id: "6" });
+                          }}
+                          className={`w-[53px] h-[40px] border-y-2 border-[#067A46] text-[16px] ${
+                            NumRecp.id === "6"
+                              ? " bg-[#067A46] text-white font-bold rounded-md scale-105"
+                              : "text-[#067A46] bg-white hover:bg-[#d0ee98] border-2 rounded-r-md"
+                          }`}
+                        >
                           6
                         </button>
                       </div>
@@ -188,12 +293,15 @@ const PlansPage = () => {
                       <div className="w-[444px] h-[234px] border-2 mt-10 rounded-md text-left px-5 pt-3 text-[16px]">
                         <div className="pb-5 border-b-2">
                           <p className="font-semibold leading-6">
-                            Meat & Veggies
+                            {plan.planname.join(" and ")}
                           </p>
                           <p className="leading-6">
-                            3 meals for 4 people per week
+                            {select.id} meals for {NumRecp.id} people per week
                           </p>
-                          <p className="leading-6">12 total servings</p>
+                          <p className="leading-6">
+                            {Number(select.id) * Number(NumRecp.id)} total
+                            servings
+                          </p>
                         </div>
                         <div className="text-[16px]">
                           <div className="flex items-center justify-between h-[32px]">
@@ -202,7 +310,7 @@ const PlansPage = () => {
                           </div>
                           <div className="flex items-center justify-between h-[32px]">
                             <p>Price per serving</p>
-                            <p>$8.86</p>
+                            <p>$9.86</p>
                           </div>
                           <div className="flex items-center justify-between bg-gray-200 h-[48px] font-semibold px-2">
                             <p>Total</p>
@@ -214,7 +322,10 @@ const PlansPage = () => {
                   </div>
                 </div>
               </div>
-              <button className="w-[319px] h-[48px] py-[12px] px-[24px] bg-[#067A46] rounded text-white text-[16px] hover:bg-[#056835] my-5">
+              <button
+                onClick={handleNext}
+                className="w-[319px] h-[48px] py-[12px] px-[24px] bg-[#067A46] rounded text-white text-[16px] hover:bg-[#056835] my-5"
+              >
                 Select this plan
               </button>
             </div>
