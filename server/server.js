@@ -14,6 +14,7 @@ app.get("/", (req, res) => {
   res.send("Hello from express");
 });
 
+app.use("/plan", require("./routes/planRoutes"));
 // syntax app.use('path', express.static('storedpathofthefile'))
 //app.use('/images', express.static('./server/uploads'))
 

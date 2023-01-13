@@ -20,6 +20,9 @@ import { useNavigate } from "react-router-dom";
 
 const PlansPage = () => {
   const navigate = useNavigate();
+
+  const price2 = [49, 59, 78, 97, 117];
+  const price4 = [78, 113, 148, 185, 215];
   const [select, setSelect] = useState({ id: "" });
 
   const [NumRecp, setNumRecp] = useState({ id: "" });
@@ -54,6 +57,7 @@ const PlansPage = () => {
     setNumRecp({ id: val });
   };
 
+  const handlePrice = () => {};
   const handleNext = () => {
     navigate("/address");
   };
@@ -306,7 +310,7 @@ const PlansPage = () => {
                         <div className="text-[16px]">
                           <div className="flex items-center justify-between h-[32px]">
                             <p>Box price</p>
-                            <p>$113.86</p>
+                            <p>8456</p>
                           </div>
                           <div className="flex items-center justify-between h-[32px]">
                             <p>Price per serving</p>

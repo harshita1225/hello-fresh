@@ -20,9 +20,9 @@ const Address = () => {
     address: "",
     floor: "",
     city: "",
-    zipcode: "",
+    zipcode: 0,
     state: "",
-    phonenumber: "",
+    phonenumber: 0,
   });
   const statename = [
     {
