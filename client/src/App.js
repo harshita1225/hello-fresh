@@ -5,7 +5,7 @@ import Address from "./components/plans/Address";
 import PaymentPage from "./components/plans/PaymentPage";
 import Homepage from "./components/homepage/Homepage";
 import PlansPage from "./components/plans/PlansPage";
-import Testtoggle from "./components/plans/Testtoggle";
+
 import Register from "./components/Register";
 import Login from "./components/Login";
 import MenusPage from "./components/menuspage/MenusPage";
