@@ -1,5 +1,6 @@
 const User = require("../models/User");
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
 const SALT_ROUNDS = 10;
 
@@ -46,6 +47,12 @@ module.exports.login = async (req, res) => {
       const newUser = user.toObject();
 
       delete newUser.password;
+
+      const token = jwt.sign({ id: user._id }, process.env.SECRET, {
+        expiresIn: "1h",
+      });
+
+      res.cookie("hellofresh", token);
 
       res.send({ success: true, user: newUser });
     } else {
