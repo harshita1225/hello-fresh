@@ -1,24 +1,59 @@
 import React from "react";
-import Box from "@mui/material/Box";
+
 import TextField from "@mui/material/TextField";
-import MenuItem from "@mui/material/MenuItem";
-import FormGroup from "@mui/material/FormGroup";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
+
 import Button from "@mui/material/Button";
 import ProgressBar from "../plans/ProgressBar";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { MdOutlineDoneOutline } from "react-icons/md";
+
 import paymenticons from "../images/paymenticons.png";
 import { BsFillCheckCircleFill } from "react-icons/bs";
 import flexplan from "../images/flexplan.png";
+import { Context } from "../../Context";
+import { useContext } from "react";
+import axios from "axios";
 
 const PaymentPage = () => {
   const navigate = useNavigate();
+  const { planData, setPlanData, dispatch } = useContext(Context);
+  const [data, setData] = useState({
+    creditcard: 0,
+    expdate: "",
+    cvv: 0,
+  });
+
+  const handleNext = async () => {
+    if (!data.creditcard || !data.expdate || !data.cvv) {
+      alert("Please make the necessary selection");
+      return;
+    } else {
+      setPlanData({
+        ...planData,
+        creditcard: data.creditcard,
+        expdate: data.expdate,
+        cvv: data.cvv,
+      });
+
+      const response = await axios.post("/plans/add", planData);
+      console.log("req body", response);
+      if (response.data.success) {
+        dispatch({
+          type: "addPlan",
+          payload: response.data.plan,
+        });
+      }
+      navigate("/cart");
+    }
+  };
   return (
     <>
-      <ProgressBar />
+      <ProgressBar
+        selectPlan={false}
+        selectMeals={false}
+        address={false}
+        checkout={true}
+      />
       <div className="w-screen h-screen flex-col ">
         <div className="">
           <div className=" h-[850px] bg-white rounded-2xl py-10">
@@ -50,12 +85,18 @@ const PaymentPage = () => {
                         id="outlined-basic"
                         label="Credit Card Number"
                         variant="outlined"
+                        onChange={(e) =>
+                          setData({ ...data, creditcard: e.target.value })
+                        }
                       />
                       <TextField
                         style={{ width: "30rem" }}
                         id="outlined-basic"
                         label="Exp Date"
                         variant="outlined"
+                        onChange={(e) =>
+                          setData({ ...data, expdate: e.target.value })
+                        }
                       />
                       <TextField
                         style={{
@@ -64,6 +105,9 @@ const PaymentPage = () => {
                         id="outlined-basic"
                         label="CVV"
                         variant="outlined"
+                        onChange={(e) =>
+                          setData({ ...data, cvv: e.target.value })
+                        }
                       />
                     </div>
                   </div>
@@ -132,6 +176,7 @@ const PaymentPage = () => {
                       width: "980px",
                     }}
                     variant="contained"
+                    onClick={handleNext}
                   >
                     Place order & select meals
                   </Button>
@@ -155,7 +200,7 @@ const PaymentPage = () => {
                 </p>
               </div>
               <div className="w-[340px] ">
-                <p lassName="text-[16px] text-[#242424]">
+                <p className="text-[16px] text-[#242424]">
                   {" "}
                   It rarely happens, but if you ever have an issue with your
                   delivery or meals, our award-winning customer support team is
@@ -171,7 +216,7 @@ const PaymentPage = () => {
                 </p>
               </div>
               <div className="w-[340px] ">
-                <p lassName="text-[16px] text-[#242424]">
+                <p className="text-[16px] text-[#242424]">
                   {" "}
                   Your data and privacy is safe and secure with us. Online
                   payments are encoded with industry leading encryption and we
@@ -187,7 +232,7 @@ const PaymentPage = () => {
                 </p>
               </div>
               <div className="w-[340px] ">
-                <p lassName="text-[16px] text-[#242424]">
+                <p className="text-[16px] text-[#242424]">
                   {" "}
                   You will be charged the day after your cutoff deadline. You
                   can see your cutoff date under “My Menu” after you have

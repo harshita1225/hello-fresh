@@ -8,16 +8,15 @@ dbConnect(); // connects to db
 
 app.use(express.json()); // needed to parse the body of the request
 app.use("/users", require("./routes/userRoutes"));
-
+app.use("/plans", require("./routes/planRoutes"));
 app.get("/", (req, res) => {
   console.log("Hello from route");
 
   res.send("Hello from express");
 });
 
-app.use("/plan", require("./routes/planRoutes"));
 // syntax app.use('path', express.static('storedpathofthefile'))
 //app.use('/images', express.static('./server/uploads'))
 
-const port = process.env.PORT || 4445;
+const port = process.env.PORT || 8001;
 app.listen(port, () => console.log("Server is up and running at port", port));

@@ -1,8 +1,10 @@
 import React from "react";
 import Banner from "../images/banner3.jpg";
+import { useNavigate } from "react-router-dom";
 import { BiChevronDown } from "react-icons/bi";
 
 const Hero = () => {
+  const navigate = useNavigate();
   return (
     <div className="relative ">
       <img className="h-[650px] w-[100%] object-cover" src={Banner} alt="" />
@@ -16,7 +18,10 @@ const Hero = () => {
         </p>
       </div>
       <div className="w-[300px] absolute top-[65%] left-[43%]">
-        <button className="py-[12px] px-[24px] bg-[#067A46] rounded text-white text-[16px] hover:bg-[#056835]">
+        <button
+          onClick={() => navigate("/plans")}
+          className="py-[12px] px-[24px] bg-[#067A46] rounded text-white text-[16px] hover:bg-[#056835]"
+        >
           View our plans
         </button>
       </div>

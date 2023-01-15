@@ -1,4 +1,5 @@
 import React from "react";
+import { useContext } from "react";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import MenuItem from "@mui/material/MenuItem";
@@ -10,9 +11,11 @@ import ProgressBar from "../plans/ProgressBar";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
+import { Context } from "../../Context";
 
 const Address = () => {
   const navigate = useNavigate();
+  const { state, dispatch, planData, setPlanData } = useContext(Context);
 
   const [data, setData] = useState({
     firstname: "",
@@ -47,12 +50,42 @@ const Address = () => {
     },
   ];
 
-  const handleNext = async () => {
-    navigate("/payment");
+  const handleNext = () => {
+    if (
+      !data.firstname ||
+      !data.lastname ||
+      !data.phonenumber ||
+      !data.city ||
+      !data.zipcode ||
+      !data.address ||
+      !data.floor
+    ) {
+      alert("Please make the necessary selection");
+      return;
+    } else {
+      setPlanData({
+        ...planData,
+        firstname: data.firstname,
+        lastname: data.lastname,
+        address: data.address,
+        floor: data.floor,
+        city: data.city,
+        zipcode: data.zipcode,
+        state: data.state,
+        phonenumber: data.phonenumber,
+      });
+      navigate("/payment");
+    }
   };
+
   return (
     <>
-      <ProgressBar />
+      <ProgressBar
+        selectPlan={false}
+        selectMeals={false}
+        address={true}
+        checkout={false}
+      />
       <div className="w-screen h-screen flex justify-center ">
         <div className=" h-[800px] bg-gray-100 rounded-2xl py-10 ">
           <div className="w-[1112px]  flex-col justify-center font-sans">
@@ -86,7 +119,7 @@ const Address = () => {
                       id="outlined-required"
                       label="Last name"
                       onChange={(e) =>
-                        setData({ ...data, firstname: e.target.value })
+                        setData({ ...data, lastname: e.target.value })
                       }
                     />
                   </div>
@@ -97,12 +130,18 @@ const Address = () => {
                       id="outlined-basic"
                       label="Street Address"
                       variant="outlined"
+                      onChange={(e) =>
+                        setData({ ...data, address: e.target.value })
+                      }
                     />
                     <TextField
                       style={{ width: "30rem" }}
                       id="outlined-basic"
                       label="Apt,Suite,Foor"
                       variant="outlined"
+                      onChange={(e) =>
+                        setData({ ...data, floor: e.target.value })
+                      }
                     />
                   </div>
                   <div className="flex gap-10 justify-center">
@@ -112,12 +151,18 @@ const Address = () => {
                       id="outlined-basic"
                       label="City"
                       variant="outlined"
+                      onChange={(e) =>
+                        setData({ ...data, city: e.target.value })
+                      }
                     />
                     <TextField
                       style={{ width: "30rem" }}
                       id="outlined-basic"
                       label="Zip Code"
                       variant="outlined"
+                      onChange={(e) =>
+                        setData({ ...data, zipcode: e.target.value })
+                      }
                     />
                   </div>
 
@@ -128,6 +173,9 @@ const Address = () => {
                       id="select-state"
                       select
                       label="Select"
+                      onChange={(e) =>
+                        setData({ ...data, state: e.target.value })
+                      }
                     >
                       {statename.map((option) => (
                         <MenuItem key={option.value} value={option.value}>
@@ -140,6 +188,9 @@ const Address = () => {
                       id="outlined-basic"
                       label="Phone Number"
                       variant="outlined"
+                      onChange={(e) =>
+                        setData({ ...data, phonenumber: e.target.value })
+                      }
                     />
                   </div>
                 </Box>
@@ -229,7 +280,7 @@ const Address = () => {
                   </p>
                 </div>
                 <div className="w-[340px] ">
-                  <p lassName="text-[16px] text-[#242424]">
+                  <p className="text-[16px] text-[#242424]">
                     {" "}
                     We know our customers are busy, so you do not need to be
                     home to receive your box. Our custom delivery boxes are
@@ -246,7 +297,7 @@ const Address = () => {
                   </p>
                 </div>
                 <div className="w-[340px] ">
-                  <p lassName="text-[16px] text-[#242424]">
+                  <p className="text-[16px] text-[#242424]">
                     {" "}
                     Yes, you can adjust the date and location of every delivery,
                     and as a reminder, you do not need to be home to receive
@@ -262,7 +313,7 @@ const Address = () => {
                   </p>
                 </div>
                 <div className="w-[340px] ">
-                  <p lassName="text-[16px] text-[#242424]">
+                  <p className="text-[16px] text-[#242424]">
                     {" "}
                     Your plan is weekly, but you can easily skip a week, pause,
                     or cancel your account at any time. Just make sure you do so

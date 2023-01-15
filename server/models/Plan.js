@@ -38,7 +38,7 @@ const planSchema = new Schema(
       unique: true,
     },
     planname: [],
-    numberPeople: {
+    numberpeople: {
       type: Number,
       required: true,
     },
@@ -48,20 +48,12 @@ const planSchema = new Schema(
     },
     creditcard: {
       type: Number,
-
-      unique: true,
+      required: true,
     },
     cvv: {
       type: Number,
-      unique: true,
+      required: true,
     },
-
-    cart: [
-      {
-        quantity: Number,
-        product: { type: Schema.Types.ObjectId, ref: "Product" },
-      },
-    ],
   },
   { timestamps: true }
 );
