@@ -1,11 +1,13 @@
 const express = require("express");
 const app = express();
+const cookieParser = require("cookie-parser");
 
 require("dotenv").config();
 
 const dbConnect = require("./config/db");
 dbConnect(); // connects to db
 
+app.use(cookieParser());
 app.use(express.json()); // needed to parse the body of the request
 app.use("/users", require("./routes/userRoutes"));
 app.use("/plans", require("./routes/planRoutes"));

@@ -1,6 +1,13 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const WhatsInTheBox = () => {
+  const navigate = useNavigate();
+
+  const navigateToPlans = () => {
+    navigate("/plans");
+  };
+
   return (
     <>
       <div className="flex flex-row max-w-[1140px] mx-auto pt-[20px]  bg-white text-[16px] font-normal text-[#242424] px-0 ">
@@ -46,7 +53,10 @@ const WhatsInTheBox = () => {
             </p>
           </div>
           <div className="w-full items-center mt-[32px] inline-block m-0 py-3 ">
-            <button className="block w-full rounded text-[16px] bg-[#067a46] leading-[24px] text-[#ffffff] pointer py-3  hover:bg-[#056835] m-0">
+            <button
+              onClick={navigateToPlans}
+              className="block w-full rounded text-[16px] bg-[#067a46] leading-[24px] text-[#ffffff] pointer py-3  hover:bg-[#056835] m-0"
+            >
               View our plans
             </button>
           </div>

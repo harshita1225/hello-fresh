@@ -5,7 +5,6 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import LargeFooter from "./homepage/LargeFooter";
 import Footer from "./homepage/Footer";
-
 import { AiOutlineEyeInvisible } from "react-icons/ai";
 import Appstore from "../components/images/registerpage.png";
 
@@ -20,7 +19,7 @@ const Register = () => {
     const response = await axios.post("/users/register", data);
     console.log("Register Response", response);
 
-    if (response.data.success) navigate("/");
+    if (response.data.success) navigate("/login");
   };
 
   return (

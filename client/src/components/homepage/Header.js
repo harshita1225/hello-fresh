@@ -1,12 +1,15 @@
 import Logo from "../images/logo.png";
 import { BiChevronDown } from "react-icons/bi";
 import { BsCart3 } from "react-icons/bs";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   return (
     <nav className="h-[56px] flex items-center p-[20px] cursor-pointer justify-between">
       <div className=" flex gap-[25px] items-center">
-        <img className="h-[30px]" src={Logo} alt="logo" />
+        <Link to="/">
+          <img className="h-[30px]" src={Logo} alt="logo" />
+        </Link>
         <ul className="flex gap-[10px] items-center">
           <li className="hover:bg-[#E3F5BF] w-[90px] h-[52px] flex items-center justify-center">
             Our Plans
@@ -30,9 +33,11 @@ const Header = () => {
         <div className="flex items-center justify-center hover:bg-[#E3F5BF] w-[49px] h-[52px]">
           <BsCart3 size="20px" />
         </div>
-        <button className="border-[1px] border-[#367B47] rounded py-[8px] px-[24px] text-[#367B47]  hover:bg-[#E3F5BF] hover:border-2">
-          Login
-        </button>
+        <Link to="/login">
+          <button className="border-[1px] border-[#367B47] rounded py-[8px] px-[24px] text-[#367B47]  hover:bg-[#E3F5BF] hover:border-2">
+            Login
+          </button>
+        </Link>
       </div>
     </nav>
   );

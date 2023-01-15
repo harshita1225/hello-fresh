@@ -1,6 +1,13 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const ColumnSection = () => {
+  const navigate = useNavigate();
+
+  const navigateToPlans = () => {
+    navigate("/plans");
+  };
+
   return (
     <div className="box-border border-b divide-[#EEEEEE] pb-[32px]  bg-[#f8f8f8] text-[#242424]">
       <h2 className="text-center text-[32px] font-normal leading-[38px] pt-[40px] pb-[30px] px-[10px]">
@@ -67,7 +74,10 @@ const ColumnSection = () => {
         </div>
       </div>
       <div className="flex flex-col items-center mt-[24px] m-auto">
-        <button className="rounded text-[16px] bg-[#067a46] text-[#ffffff] pointer py-3 px-6 font-normal hover:bg-[#056835]">
+        <button
+          onClick={navigateToPlans}
+          className="rounded text-[16px] bg-[#067a46] text-[#ffffff] pointer py-3 px-6 font-normal hover:bg-[#056835]"
+        >
           Get started
         </button>
       </div>
