@@ -1,5 +1,5 @@
-import React from "react";
-import { useState } from "react";
+import React, { useEffect } from "react";
+import { useState, useContext } from "react";
 import ProgressBar from "./ProgressBar";
 import plan11 from "../images/plan11.png";
 import plan2 from "../images/plan2.png";
@@ -11,7 +11,7 @@ import { BsFillCheckCircleFill } from "react-icons/bs";
 import CarouselMenu from "../homepage/CarouselMenu";
 import { BsArrowRepeat } from "react-icons/bs";
 import Button from "@mui/material/Button";
-
+import { Context } from "../../Context";
 import TextField from "@mui/material/TextField";
 import { AiOutlineTag } from "react-icons/ai";
 import trustpilot from "../images/trustpilot.png";
@@ -20,9 +20,12 @@ import { useNavigate } from "react-router-dom";
 
 const PlansPage = () => {
   const navigate = useNavigate();
-  const [select, setSelect] = useState({ id: "" });
+  const { state, dispatch, planData, setPlanData, setProgressBar } =
+    useContext(Context);
 
+  const [select, setSelect] = useState({ id: "" });
   const [NumRecp, setNumRecp] = useState({ id: "" });
+  const [boxprice, setBoxPrice] = useState("");
 
   const [selectPlan, setSelectPlan] = useState({
     id1: false,
@@ -35,8 +38,11 @@ const PlansPage = () => {
 
   const [plan, setPlan] = useState({
     planname: [],
-    numberPeople: 0,
-    recipeWeek: 0,
+    numberpeople: 0,
+    recipeweek: 0,
+    price: "",
+    delivery: 9.86,
+    total: 0,
   });
 
   const handlePlanSelection = (val, name) => {
@@ -44,25 +50,75 @@ const PlansPage = () => {
     setSelectPlan({ ...selectPlan, [name]: !selectPlan[name] });
   };
 
-  const handleNumPeople = (val) => {
-    setPlan({ ...plan, numberPeople: val });
-    setSelect({ id: val });
-  };
-
-  const handleNumRecp = (val) => {
-    setPlan({ ...plan, recipeWeek: val });
-    setNumRecp({ id: val });
-  };
+  useEffect(() => {
+    const boxPrice = async (select, Recp) => {
+      if (select === "2") {
+        if (Recp === "2") {
+          setBoxPrice("49");
+        } else if (Recp === "3") {
+          setBoxPrice("59");
+        } else if (Recp === "4") {
+          setBoxPrice("78");
+        } else if (Recp === "5") {
+          setBoxPrice("97");
+        } else if (Recp === "6") {
+          setBoxPrice("117");
+        } else {
+          setBoxPrice("0");
+        }
+      } else if (select === "4") {
+        if (Recp === "2") {
+          setBoxPrice("78");
+        } else if (Recp === "3") {
+          setBoxPrice("113");
+        } else if (Recp === "4") {
+          setBoxPrice("148");
+        } else if (Recp === "5") {
+          setBoxPrice("185");
+        } else if (Recp === "6") {
+          setBoxPrice("215");
+        } else {
+          setBoxPrice("0");
+        }
+      }
+    };
+    boxPrice(select.id, NumRecp.id);
+    setPlan({
+      ...plan,
+      price: Number(boxprice),
+      total: Number(boxprice) + 9.86,
+    });
+  }, [select, NumRecp]);
 
   const handleNext = () => {
-    navigate("/address");
+    if (!plan.planname || !plan.numberpeople || !plan.recipeweek) {
+      alert("Please make the necessary selection");
+      return;
+    } else {
+      setPlanData({
+        ...planData,
+        planname: plan.planname,
+        numberpeople: plan.numberpeople,
+        recipeweek: plan.recipeweek,
+        price: plan.price,
+        delivery: plan.delivery,
+        total: plan.total,
+      });
+
+      navigate("/address");
+    }
   };
 
-  console.log(plan);
+  console.log(select.id, NumRecp.id, plan, boxprice);
   return (
     <div>
       <div>
-        <ProgressBar />
+        <ProgressBar
+          selectPlan={true}
+          selectMeals={false}
+          address={false}
+          checkout={false}
+        />
         <div className="w-screen">
           <div className="w-[1200px] py-[32px] px-[40px] border-2 bg-white mx-auto">
             <div className="w-[1064px] h-[773px] mx-auto">
@@ -186,7 +242,7 @@ const PlansPage = () => {
                         <button
                           value="2"
                           onClick={(e) => {
-                            setPlan({ ...plan, numberPeople: e.target.value });
+                            setPlan({ ...plan, numberpeople: e.target.value });
                             setSelect({ id: "2" });
                           }}
                           className={`w-[135px] h-[40px] border-2 border-[#067A46] text-[16px]  ${
@@ -200,7 +256,7 @@ const PlansPage = () => {
                         <button
                           value="4"
                           onClick={(e) => {
-                            setPlan({ ...plan, numberPeople: e.target.value });
+                            setPlan({ ...plan, numberpeople: e.target.value });
                             setSelect({ id: "4" });
                           }}
                           className={`w-[135px] h-[40px]  ml-[-15px]  border-[#067A46] border-2 text-[16px]
@@ -220,7 +276,7 @@ const PlansPage = () => {
                         <button
                           value="2"
                           onClick={(e) => {
-                            setPlan({ ...plan, recipeWeek: e.target.value });
+                            setPlan({ ...plan, recipeweek: e.target.value });
                             setNumRecp({ id: "2" });
                           }}
                           className={`w-[53px] h-[40px] border-2 border-[#067A46] rounded-l-md  text-[16px] ${
@@ -234,7 +290,7 @@ const PlansPage = () => {
                         <button
                           value="3"
                           onClick={(e) => {
-                            setPlan({ ...plan, recipeWeek: e.target.value });
+                            setPlan({ ...plan, recipeweek: e.target.value });
                             setNumRecp({ id: "3" });
                           }}
                           className={`w-[53px] h-[40px] border-y-2 border-[#067A46] text-[16px] ${
@@ -248,7 +304,7 @@ const PlansPage = () => {
                         <button
                           value="4"
                           onClick={(e) => {
-                            setPlan({ ...plan, recipeWeek: e.target.value });
+                            setPlan({ ...plan, recipeweek: e.target.value });
                             setNumRecp({ id: "4" });
                           }}
                           className={`w-[53px] h-[40px] border-2 border-[#067A46] text-[16px] ${
@@ -262,7 +318,7 @@ const PlansPage = () => {
                         <button
                           value="5"
                           onClick={(e) => {
-                            setPlan({ ...plan, recipeWeek: e.target.value });
+                            setPlan({ ...plan, recipeweek: e.target.value });
                             setNumRecp({ id: "5" });
                           }}
                           className={`w-[53px] h-[40px] border-y-2 border-[#067A46] text-[16px] ${
@@ -276,7 +332,7 @@ const PlansPage = () => {
                         <button
                           value="6"
                           onClick={(e) => {
-                            setPlan({ ...plan, recipeWeek: e.target.value });
+                            setPlan({ ...plan, recipeweek: e.target.value });
                             setNumRecp({ id: "6" });
                           }}
                           className={`w-[53px] h-[40px] border-y-2 border-[#067A46] text-[16px] ${
@@ -306,15 +362,15 @@ const PlansPage = () => {
                         <div className="text-[16px]">
                           <div className="flex items-center justify-between h-[32px]">
                             <p>Box price</p>
-                            <p>$113.86</p>
+                            <p>€ {boxprice}</p>
                           </div>
                           <div className="flex items-center justify-between h-[32px]">
                             <p>Price per serving</p>
-                            <p>$9.86</p>
+                            <p>€ 9.86</p>
                           </div>
                           <div className="flex items-center justify-between bg-gray-200 h-[48px] font-semibold px-2">
                             <p>Total</p>
-                            <p>$140.86</p>
+                            <p>€ {Number(boxprice) + 9.86}</p>
                           </div>
                         </div>
                       </div>
