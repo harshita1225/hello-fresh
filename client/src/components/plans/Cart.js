@@ -62,13 +62,19 @@ const Cart = () => {
 
                   {/* below div needs to be repeted in map loop */}
 
-                  {state?.plans?.map((item) => (
-                    <CartCard
-                      key={item._id}
-                      plan={item}
-                      handleDelete={handleDelete}
-                    />
-                  ))}
+                  {state.plans.length > 0 ? (
+                    state?.plans?.map((item) => (
+                      <CartCard
+                        key={item._id}
+                        plan={item}
+                        handleDelete={handleDelete}
+                      />
+                    ))
+                  ) : (
+                    <p className="text-red-600 font-semibold m-10">
+                      Your cart is empty!!
+                    </p>
+                  )}
                 </div>
 
                 <div className="w-full px-6 border-2 mt-3">
@@ -145,7 +151,13 @@ const Cart = () => {
                       Select another box
                     </Button>
                     <Button
-                      onClick={() => navigate("/confirmationpage")}
+                      onClick={() => {
+                        if (state.plans.length > 0) {
+                          return navigate("/confirmationpage");
+                        } else {
+                          alert("Your Cart is empty");
+                        }
+                      }}
                       style={{
                         backgroundColor: "#067A46",
                         width: "200px",

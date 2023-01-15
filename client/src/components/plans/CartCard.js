@@ -15,6 +15,7 @@ import { Context } from "../../Context";
 import { ListItem } from "@mui/material";
 
 function CartCard({ plan, handleDelete }) {
+  console.log("plan", plan.price);
   return (
     <div className=" w-full border-2 flex m-5 mx-auto py-9 text-[#242424]">
       <AiFillCloseCircle
@@ -31,9 +32,9 @@ function CartCard({ plan, handleDelete }) {
       <div className="w-[300px] text-left border-2 border-dashed border-slate-300 mr-[20px] p-1">
         <div className="flex items-center justify-between mb-3">
           <p className="font-semibold text-[#067A46]">Plan Summary</p>
-          <Link to={"/editplan/" + plan._id}>
+          {/* <Link to={"/edit/" + plan._id}>
             <BiEdit className="text-[#067A46]  text-[22px] cursor-pointer" />
-          </Link>
+          </Link> */}
         </div>
         <p className="font-semibold text-[#242424]">
           {plan.planname.join(", ")}
@@ -55,7 +56,7 @@ function CartCard({ plan, handleDelete }) {
       <div className="w-[300px] text-left border-2 border-slate-300 border-dashed mr-[20px] p-1">
         <div className="flex items-center justify-between mb-3">
           <p className="font-semibold">Address</p>
-          <Link to={"/editplan/" + plan._id}>
+          <Link to={"/edit/" + plan._id}>
             <BiEdit className="text-[#067A46]  text-[22px] cursor-pointer" />
           </Link>
         </div>
@@ -74,7 +75,7 @@ function CartCard({ plan, handleDelete }) {
         </div>
         <p className="flex justify-between">
           Box Price:
-          <span className="font-semibold">{plan.price}</span>{" "}
+          <span className="font-semibold">{Number(plan.price)}</span>{" "}
         </p>
         <p className="flex justify-between">
           Delivery:

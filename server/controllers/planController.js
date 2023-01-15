@@ -48,6 +48,20 @@ module.exports.delete = async (req, res) => {
   }
 };
 
+module.exports.findone = async (req, res) => {
+  try {
+    console.log("🚀 ~ plan findone hello", req.query);
+
+    const plan = await Plan.findOne(req.query).select("-__v");
+    console.log("🚀 ~ module.exports.findone= ~ plan", plan);
+
+    res.send({ success: true, plan });
+  } catch (error) {
+    console.log("🚀 ~ plan findone error", error.message);
+
+    res.send({ success: false, error: error.message });
+  }
+};
 module.exports.edit = async (req, res) => {
   try {
     console.log("🚀 ~ plan edit hello", req.body);

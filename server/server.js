@@ -20,5 +20,5 @@ app.get("/", (req, res) => {
 // syntax app.use('path', express.static('storedpathofthefile'))
 //app.use('/images', express.static('./server/uploads'))
 
-const port = process.env.PORT || 8001;
+const port = process.env.PORT || 4445;
 app.listen(port, () => console.log("Server is up and running at port", port));
