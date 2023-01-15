@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import TextField from "@mui/material/TextField";
 
@@ -23,18 +23,20 @@ const PaymentPage = () => {
     cvv: 0,
   });
 
-  const handleNext = async () => {
-    if (!data.creditcard || !data.expdate || !data.cvv) {
-      alert("Please make the necessary selection");
-      return;
-    } else {
+  useEffect(() => {
+    const getData = async () => {
       setPlanData({
         ...planData,
         creditcard: data.creditcard,
         expdate: data.expdate,
         cvv: data.cvv,
       });
+    };
+    getData();
+  }, [data]);
 
+  useEffect(() => {
+    const getData = async () => {
       const response = await axios.post("/plans/add", planData);
       console.log("req body", response);
       if (response.data.success) {
@@ -43,9 +45,19 @@ const PaymentPage = () => {
           payload: response.data.plan,
         });
       }
+    };
+    getData();
+  }, [planData, dispatch]);
+
+  const handleNext = async () => {
+    if (!data.creditcard || !data.expdate || !data.cvv) {
+      alert("Please make the necessary selection");
+      return;
+    } else {
       navigate("/cart");
     }
   };
+
   return (
     <>
       <ProgressBar

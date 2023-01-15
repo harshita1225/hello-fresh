@@ -54,6 +54,9 @@ const planSchema = new Schema(
       type: Number,
       required: true,
     },
+    price: {
+      type: Number,
+    },
   },
   { timestamps: true }
 );
