@@ -1,139 +1,159 @@
-import React, { useState, useMemo, useContext } from "react";
-import { GrClose } from "react-icons/gr";
-import { FaFacebook } from "react-icons/fa";
-import { TfiEmail } from "react-icons/tfi";
-import { AiFillApple } from "react-icons/ai";
-import { FcGoogle } from "react-icons/fc";
-import Select from "react-select";
-import countryList from "react-select-country-list";
-import { Context } from "../../context/Context";
+// import axios from "axios";
+import Header from "./homepage/Header";
+import axios from "axios";
+import { useState, useContext } from "react";
+import { Context } from "../Context";
 import { useNavigate } from "react-router-dom";
-// import CardContainer from "../card/CardContainer";
-//import Select from "@mui/material/Select";
-function CountrySelector() {
-  const [value, setValue] = useState("");
-  const options = useMemo(() => countryList().getData(), []);
-  const changeHandler = (value) => {
-    setValue(value);
-  };
-  const customStyles = {
-    option: (provided, state) => ({
-      ...provided,
-      padding: 5,
-    }),
-    control: () => ({
-      // none of react-select's styles are passed to <Control />
-      width: 500,
-      display: "flex",
-    }),
-    singleValue: (provided, state) => {
-      const opacity = state.isDisabled ? 0.5 : 1;
-      const transition = "opacity 300ms";
-      return { ...provided, opacity, transition };
-    },
-  };
-  return (
-    <Select
-      styles={customStyles}
-      options={options}
-      value={value}
-      onChange={changeHandler}
-    />
-  );
-}
-const LoginForm = () => {
-  const { handleLogin, login } = useContext(Context);
+import { Link } from "react-router-dom";
+
+import LargeFooter from "./homepage/LargeFooter";
+import Footer from "./homepage/Footer";
+import { AiOutlineEyeInvisible } from "react-icons/ai";
+import Appstore from "../components/images/registerpage.png";
+import Or from "../components/images/login-or.png";
+import { GoMail } from "react-icons/go";
+import { AiFillFacebook } from "react-icons/ai";
+import { FcGoogle } from "react-icons/fc";
+import { RiAppleLine } from "react-icons/ri";
+
+const Login = () => {
   const navigate = useNavigate();
+
+  const { state, dispatch } = useContext(Context);
+
+  const [data, setData] = useState({
+    email: "",
+    password: "",
+  });
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    const response = await axios.post("/users/login", data);
+    console.log("~ handleLogin ~ response", response);
+
+    if (response.data.success) {
+      dispatch({
+        type: "login",
+        payload: response.data.user,
+      });
+
+      navigate("/");
+    } else {
+      if (response.data.errorId === 1) alert("Wrong email or password");
+    }
+  };
+
+  console.log("~ Login ~ state", state);
+
   return (
-    <>
-      <div
-        style={{ zIndex: 20 }}
-        className=" fixed w-full h-screen bg-black bg-opacity-75"
-      >
-        <div className="flex justify-center items-center h-screen">
-          <div className="  bg-white w-[568px] h-[682px] border-2 rounded-2xl">
-            <div className="h-[54px] flex border-b-2 justify-between px-10 items-center">
-              <div
-                onClick={handleLogin}
-                className=" flex justify-center items-center w-[36px] h-[36px] rounded-full hover:bg-gray-200"
-              >
-                <GrClose />
-              </div>
-              <div className="w-[160px] font-[600]">Log in or sign up</div>
-              <div></div>
-            </div>
-            <div className="w-[568] h-[353px] px-[24px]  text-[14px]">
-              <div className="text-[24px] font-[600] mt-[32px] mb-[16px]">
-                Welcome to Airbnb
-              </div>
-              <div className="border-2  border-b-0 w-full h-[56px] rounded-t-2xl flex flex-row items-center">
-                <CountrySelector />
-              </div>
-              <div className="border-2 w-full h-[56px] rounded-b-2xl flex items-center p-5">
-                <input
-                  className="w-full outline-none"
-                  placeholder="Phone number"
-                />
-              </div>
-              <div className="mt-[8px] text-[12px]">
-                We’ll call or text you to confirm your number. Standard message
-                and data rates apply.{" "}
-                <span
-                  style={{ textDecoration: "underline", fontWeight: "500" }}
-                >
-                  Privacy Policy
-                </span>
-              </div>
-              <div
-                style={{
-                  background:
-                    "radial-gradient(circle, rgb(255, 56, 92) 0%, rgb(230, 30, 77) 27.5%, rgb(227, 28, 95) 40%, rgb(215, 4, 102) 57.5%, rgb(189, 30, 89) 75%, rgb(189, 30, 89) 100%)",
-                }}
-                className="w-full h-[48px] mt-[16px] mb-[24px] rounded-2xl text-white flex justify-center items-center font-[500]"
-              >
-                Continue
-              </div>
-              <hr />
-              <div className="w-[520px] h-[240px] mt-[20px]">
-                <div className="w-[520px] h-[48px] text-[14px] mb-[16px] flex justify-between border-2 rounded-2xl items-center font-[500] text-slate-800 px-10">
-                  <div>
-                    <FaFacebook
-                      style={{ fill: "rgb(45, 85, 255)", fontSize: "2rem" }}
-                    />
-                  </div>{" "}
-                  <div>Continue with Facebook</div>
-                  <div></div>
-                </div>
-                <div className="w-[520px] h-[48px] text-[14px] mb-[16px] flex justify-between border-2 rounded-2xl items-center font-[500] text-slate-800 px-10">
-                  <div>
-                    <FcGoogle
-                      style={{ fill: "rgb(45, 85, 255)", fontSize: "2rem" }}
-                    />
-                  </div>{" "}
-                  <div>Continue with Google</div>
-                  <div></div>
-                </div>
-                <div className="w-[520px] h-[48px] text-[14px] mb-[16px] flex justify-between border-2 rounded-2xl items-center font-[500] text-slate-800 px-10">
-                  <div>
-                    <AiFillApple
-                      style={{ fill: "black", fontSize: "2.5rem" }}
-                    />
-                  </div>{" "}
-                  <div>Continue with Apple</div>
-                  <div></div>
-                </div>
-                <div className="w-[520px] h-[48px] text-[14px] mb-[16px] flex justify-between border-2 rounded-2xl items-center font-[500] text-slate-800 px-10">
-                  <div>
-                    <TfiEmail style={{ fontSize: "2rem" }} />
-                  </div>{" "}
-                  <div>Continue with email</div>
-                  <div></div>
-                </div>
-              </div>
+    <div>
+      <header className="shadow-md">
+        <Header />
+      </header>
+      <div className="bg-[#F8F8F8] flex justify-center items-center gap-[60px] px-[20px] py-[60px] h-[851px] mt-1">
+        <div className="bg-[#FFFFFF] border-[1px] border-grey w-[456px] h-[731px] px-[24px] py-[32px]">
+          <h2 className="mb-[20px] text-[32px]">Log in</h2>
+          <input
+            type="email"
+            placeholder="Email"
+            value={data.email}
+            onChange={(e) => setData({ ...data, email: e.target.value })}
+            className="border-[1px] border-black rounded w-[406px] h-[48px] p-[12px] mb-[20px]"
+          />
+          <div className="relative">
+            <input
+              type="password"
+              placeholder="Choose a password"
+              value={data.password}
+              onChange={(e) => setData({ ...data, password: e.target.value })}
+              className="border-[1px] border-black rounded w-[406px] h-[48px] p-[12px] "
+            />
+            <div className="absolute top-[13px] right-[20px]">
+              <AiOutlineEyeInvisible size={20} />
             </div>
           </div>
+
+          <div className="flex gap-[10px] mt-[10px]">
+            <input className="h-[20px] w-[20px] bg-[#067A46]" type="checkbox" />
+            <div className="flex gap-[110px]">
+              <p>Keep me signed in</p>
+              <p className="text-[#067A46] underline underline-offset-2">
+                Forgot Password?
+              </p>
+            </div>
+          </div>
+          <button
+            onClick={handleLogin}
+            className="border-[1px] border-[#367B47] rounded h-[48px] w-[406px] mt-[25px] bg-[#067A46] text-[white] hover:bg-[#2E6936] hover:border-2  mb-[15px]"
+          >
+            Log in
+          </button>
+
+          <img src={Or} className="mt-[20px]" />
+
+          <div className="relative">
+            <div className="absolute top-[33px] left-[10px]">
+              <GoMail size={23} color="#067A46" />
+            </div>
+            <button className="border-[1px] border-[#367B47] rounded h-[48px] w-[406px] text-[#067A46] hover:bg-[#E3F5BF] hover:border-2 mt-[22px]">
+              Log in without password
+            </button>
+          </div>
+          <div>
+            <div className="relative">
+              <div className="absolute top-[23px] left-[10px]">
+                <AiFillFacebook
+                  style={{ fill: "rgb(255, 255, 255)", fontSize: "2rem" }}
+                />
+              </div>
+            </div>{" "}
+            <button className="h-[48px] w-[406px] rounded text-[14px] bg-[#176FE5] text-white mt-[15px]">
+              Log in with Facebook
+            </button>
+          </div>
+          <div>
+            <div className="relative">
+              <div className="absolute top-[23px] left-[10px]">
+                <FcGoogle
+                  style={{ fill: "rgb(255, 255, 255)", fontSize: "2rem" }}
+                />
+              </div>
+            </div>{" "}
+            <button className="h-[48px] w-[406px] rounded text-[14px] bg-[#4185F4] text-white mt-[15px]">
+              Log in with Google
+            </button>
+          </div>
+          <div>
+            <div className="relative">
+              <div className="absolute top-[23px] left-[10px]">
+                <RiAppleLine
+                  style={{ fill: "rgb(255, 255, 255)", fontSize: "2rem" }}
+                />
+              </div>
+            </div>{" "}
+            <button className="h-[48px] w-[406px] rounded text-[14px] bg-[#000000] text-white mt-[15px]">
+              Log in with Apple
+            </button>
+          </div>
+          <div className="flex justify-center gap-[20px] mt-[30px]">
+            <p>Don't have an account?</p>
+            <Link to="/register">
+              <p className="text-[#067A46] underline underline-offset-2">
+                Sign up
+              </p>
+            </Link>
+          </div>
+        </div>
+        <div>
+          <img src={Appstore} alt="" />
         </div>
       </div>
-    </>
+      <footer className="border-y-[1px] border-grey">
+        <LargeFooter />
+        <Footer />
+      </footer>
+    </div>
   );
 };
+
+export default Login;

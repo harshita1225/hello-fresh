@@ -54,7 +54,7 @@ const LargeFooter = () => {
         <div className="flex flex-col items-start ml-[35px]">
           <p className="mb-[15px] font-[700]">Our company</p>
           <a
-            className="text-[14px]  text-[#067A46]"
+            className="text-[14px]  text-[#067A46] underline underline-offset-2 mb-[3px]"
             href="https://www.hellofreshgroup.com/en/"
           >
             HelloFresh Group

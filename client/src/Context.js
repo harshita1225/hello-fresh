@@ -3,10 +3,18 @@ import { createContext, useReducer } from "react";
 export const Context = createContext();
 
 const ContextProvider = ({ children }) => {
-  const initialState = {};
+  const initialState = {
+    user: {},
+  };
 
   const reducer = (state, action) => {
     switch (action.type) {
+      case "login":
+        return {
+          ...state,
+          user: { ...action.payload },
+        };
+
       case "test":
         return;
       default:
