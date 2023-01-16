@@ -9,12 +9,6 @@ const ContextProvider = ({ children }) => {
     plans: [],
   };
 
-  const [progressBar, setProgressBar] = useState({
-    selectPlan: false,
-    address: false,
-    checkout: false,
-    selectMeals: false,
-  });
   const reducer = (state, action) => {
     switch (action.type) {
       case "login":
@@ -56,7 +50,7 @@ const ContextProvider = ({ children }) => {
 
         return {
           ...state,
-          products: [...editPlans],
+          plans: [...editPlans],
         };
 
       case "logout":
@@ -85,6 +79,7 @@ const ContextProvider = ({ children }) => {
     creditcard: 0,
     cvv: 0,
     price: 0,
+    expdate: "",
   });
 
   console.log(planData);
@@ -96,8 +91,6 @@ const ContextProvider = ({ children }) => {
         dispatch,
         planData,
         setPlanData,
-        progressBar,
-        setProgressBar,
       }}
     >
       {children}

@@ -20,8 +20,7 @@ import { useNavigate } from "react-router-dom";
 
 const PlansPage = () => {
   const navigate = useNavigate();
-  const { state, dispatch, planData, setPlanData, setProgressBar } =
-    useContext(Context);
+  const { state, dispatch, planData, setPlanData } = useContext(Context);
 
   const [select, setSelect] = useState({ id: "" });
   const [NumRecp, setNumRecp] = useState({ id: "" });
@@ -85,10 +84,10 @@ const PlansPage = () => {
     boxPrice(select.id, NumRecp.id);
     setPlan({
       ...plan,
-      price: Number(boxprice),
+      price: boxprice,
       total: Number(boxprice) + 9.86,
     });
-  }, [select, NumRecp]);
+  }, [select, NumRecp, boxprice]);
 
   const handleNext = () => {
     if (!plan.planname || !plan.numberpeople || !plan.recipeweek) {
@@ -101,8 +100,6 @@ const PlansPage = () => {
         numberpeople: plan.numberpeople,
         recipeweek: plan.recipeweek,
         price: plan.price,
-        delivery: plan.delivery,
-        total: plan.total,
       });
 
       navigate("/address");
