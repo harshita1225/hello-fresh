@@ -39,7 +39,7 @@ const MenusPage = () => {
 
         {/* Weekly navigation */}
 
-        <div className="flex flex-row justify-center mx-auto w-[407px] pointer text-[14px] mb-[32px] items-center">
+        <div className="flex flex-row justify-center mx-auto w-[460px] pointer text-[14px] mb-[32px] items-center">
           <button
             onClick={() => setSelect({ id0: true })}
             className="block border-y border-l border-[#067A46] rounded-tl rounded-bl  none-l text-[#067A46] px-4 py-2 hover:bg-[#d0ee98]"
