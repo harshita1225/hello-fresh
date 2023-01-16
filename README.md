@@ -10,7 +10,7 @@ Team: Alina Cuznetov, Lesley-Ann Christl & Harshita Joshi
 
 This is replica of a popular website built using React, Node & Tailwind. It includes a registration page, log in page, meal plans page, order processing page, cart function and checkout page.
 
-Live version: https://salara-airline-react-group-project.vercel.app/
+Live version: https://hello-fresh-psi.vercel.app/
 
 ---
 
