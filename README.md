@@ -4,7 +4,7 @@ Team: Alina Cuznetov, Lesley-Ann Christl & Harshita Joshi
 
 ---
 
-![Home Page](../client/src/components/images/homeREADME.png)
+![homeREADME](https://user-images.githubusercontent.com/73485164/212683907-dd27e37a-9b1e-409c-abe0-1f0327e5f614.png)
 
 ## Description
 
@@ -14,7 +14,7 @@ Live version: https://salara-airline-react-group-project.vercel.app/
 
 ---
 
-![Meals](../client/src/components/images/mealsREADME.png)
+![mealsREADME](https://user-images.githubusercontent.com/73485164/212684005-3ac5de58-a251-4935-9dcb-439a8b284aef.png)
 
 ---
 
@@ -50,9 +50,9 @@ Live version: https://salara-airline-react-group-project.vercel.app/
 
 ---
 
-![Log In](../client/src/components/images/loginREADME.png)
+![loginREADME](https://user-images.githubusercontent.com/73485164/212684052-56c95fb8-f383-4e25-b567-67f1f4bc002b.png)
 
-![Cart](../client/src/components/images/cartREADME.png)
+![cartREADME](https://user-images.githubusercontent.com/73485164/212684073-895aa5c7-2da0-4e1b-9cd3-212f08ed7cb2.png)
 
 ---
 
