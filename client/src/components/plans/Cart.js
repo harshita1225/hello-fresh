@@ -1,29 +1,51 @@
 import React from "react";
-import Box from "@mui/material/Box";
-import TextField from "@mui/material/TextField";
-import MenuItem from "@mui/material/MenuItem";
-import FormGroup from "@mui/material/FormGroup";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
+import { useContext, useEffect } from "react";
+import axios from "axios";
 import Button from "@mui/material/Button";
 import ProgressBar from "../plans/ProgressBar";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
-import { MdOutlineDoneOutline } from "react-icons/md";
 import paymenticons from "../images/paymenticons.png";
 import { BsFillCheckCircleFill } from "react-icons/bs";
-import flexplan from "../images/flexplan.png";
-import { BiEdit } from "react-icons/bi";
-import { AiFillCloseCircle } from "react-icons/ai";
+import { Context } from "../../Context";
+import CartCard from "./CartCard";
 
 const Cart = () => {
   const navigate = useNavigate();
+  const { state, dispatch } = useContext(Context);
+
+  useEffect(() => {
+    async function getData() {
+      const response = await axios.get("/plans/list");
+      console.log("🚀 ~ getData ~ response", response);
+
+      if (response.data.success)
+        dispatch({
+          type: "loadPlans",
+          payload: response.data.plans,
+        });
+    }
+
+    getData();
+  }, []);
+
+  const handleDelete = async (id) => {
+    const response = await axios.delete("/plans/delete/" + id);
+    console.log("🚀 ~ handleDelete ~ response", response);
+
+    if (response.data.success)
+      dispatch({
+        type: "removePlan",
+        payload: id,
+      });
+  };
+
+  console.log("state.plans", state.plans);
   return (
     <>
       <ProgressBar />
       <div className="w-screen h-screen flex-col ">
-        <div className="">
-          <div className=" h-[850px] bg-white rounded-2xl py-3">
+        <div>
+          <div className=" h-screen bg-white rounded-2xl py-3">
             <div className="w-[1112px]  flex-col  font-sans mx-auto">
               <h3 className=" text-[20px] mb-4">Cart Summary</h3>
               <div className=" px-10 ">
@@ -39,61 +61,20 @@ const Cart = () => {
                   </div>
 
                   {/* below div needs to be repeted in map loop */}
-                  <div className=" w-full border-2 flex m-5 mx-auto py-9 text-[#242424]">
-                    <AiFillCloseCircle className=" cursor-pointer text-[22px] text-red-600 relative bottom-7 left-[940px]" />
-                    <div className="w-[150px]">
-                      <img
-                        className="w-[100px] h-[100px] "
-                        src="https://img.hellofresh.com/w_96,q_auto,f_auto,c_limit,fl_lossy/hellofresh_website/us/funnel-fragment/icons/BoxSavings.png"
-                        alt="icon"
+
+                  {state.plans.length > 0 ? (
+                    state?.plans?.map((item) => (
+                      <CartCard
+                        key={item._id}
+                        plan={item}
+                        handleDelete={handleDelete}
                       />
-                    </div>
-                    <div className="w-[300px] text-left border-2 border-dashed border-slate-300 mr-[20px] p-1">
-                      <div className="flex items-center justify-between mb-3">
-                        <p className="font-semibold text-[#067A46]">
-                          Plan Summary
-                        </p>
-                        <BiEdit className="text-[#067A46]  text-[22px] cursor-pointer" />
-                      </div>
-                      <p className="font-semibold text-[#242424]">
-                        Meat and Veggie
-                      </p>
-                      <p>
-                        <span className="font-semibold">3</span> recipes per
-                        week for <span className="font-semibold">4</span> people
-                      </p>
-                      <p>
-                        (<span className="font-semibold">12</span> servings
-                        total)
-                      </p>
-                    </div>
-
-                    <div className="w-[300px] text-left border-2 border-slate-300 border-dashed mr-[20px] p-1">
-                      <div className="flex items-center justify-between mb-3">
-                        <p className="font-semibold">Address</p>
-                        <BiEdit className="text-[#067A46]  text-[22px] cursor-pointer" />
-                      </div>
-                      <p>Name</p>
-                      <p>Address</p>
-                      <p>Phone number</p>
-                    </div>
-
-                    <div className="w-[150px] b  border-slate-300 border-dashed text-left p-1">
-                      <div className="mb-3">
-                        <p className="font-semibold">Total</p>
-                      </div>
-                      <p className="flex justify-between">
-                        Box Price:
-                        <span className="font-semibold">123</span>{" "}
-                      </p>
-                      <p className="flex justify-between">
-                        Delivery:<span className="font-semibold">10</span>{" "}
-                      </p>
-                      <p className="flex justify-between">
-                        Total:<span className="font-semibold">130</span>{" "}
-                      </p>
-                    </div>
-                  </div>
+                    ))
+                  ) : (
+                    <p className="text-red-600 font-semibold m-10">
+                      Your cart is empty!!
+                    </p>
+                  )}
                 </div>
 
                 <div className="w-full px-6 border-2 mt-3">
@@ -157,15 +138,35 @@ const Cart = () => {
                     that message & data rates may apply, and that I may opt out
                     at any time by texting STOP.{" "}
                   </p>
-                  <Button
-                    style={{
-                      backgroundColor: "#067A46",
-                      width: "980px",
-                    }}
-                    variant="contained"
-                  >
-                    Place order & select meals
-                  </Button>
+
+                  <div className="flex justify-between">
+                    <Button
+                      onClick={() => navigate("/plans")}
+                      style={{
+                        backgroundColor: "#067A46",
+                        width: "200px",
+                      }}
+                      variant="contained"
+                    >
+                      Select another box
+                    </Button>
+                    <Button
+                      onClick={() => {
+                        if (state.plans.length > 0) {
+                          return navigate("/confirmationpage");
+                        } else {
+                          alert("Your Cart is empty");
+                        }
+                      }}
+                      style={{
+                        backgroundColor: "#067A46",
+                        width: "200px",
+                      }}
+                      variant="contained"
+                    >
+                      Place order
+                    </Button>
+                  </div>
 
                   <div className="text-light mt-10 text-slate-500">
                     <p>© HelloFresh 2023</p>
@@ -186,7 +187,7 @@ const Cart = () => {
                 </p>
               </div>
               <div className="w-[340px] ">
-                <p lassName="text-[16px] text-[#242424]">
+                <p className="text-[16px] text-[#242424]">
                   {" "}
                   We know our customers are busy, so you do not need to be home
                   to receive your box. Our custom delivery boxes are designed to
@@ -203,7 +204,7 @@ const Cart = () => {
                 </p>
               </div>
               <div className="w-[340px] ">
-                <p lassName="text-[16px] text-[#242424]">
+                <p className="text-[16px] text-[#242424]">
                   {" "}
                   Yes, you can adjust the date and location of every delivery,
                   and as a reminder, you do not need to be home to receive your
@@ -219,7 +220,7 @@ const Cart = () => {
                 </p>
               </div>
               <div className="w-[340px] ">
-                <p lassName="text-[16px] text-[#242424]">
+                <p className="text-[16px] text-[#242424]">
                   {" "}
                   Your plan is weekly, but you can easily skip a week, pause, or
                   cancel your account at any time. Just make sure you do so

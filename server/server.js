@@ -10,7 +10,7 @@ dbConnect(); // connects to db
 app.use(cookieParser());
 app.use(express.json()); // needed to parse the body of the request
 app.use("/users", require("./routes/userRoutes"));
-
+app.use("/plans", require("./routes/planRoutes"));
 app.get("/", (req, res) => {
   console.log("Hello from route");
 
