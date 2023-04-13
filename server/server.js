@@ -2,15 +2,24 @@ const express = require("express");
 const app = express();
 const cookieParser = require("cookie-parser");
 
+// const cors = require("cors");
+
 require("dotenv").config();
 
-const dbConnect = require("./config/db");
+const dbConnect = require("./src/config/db");
 dbConnect(); // connects to db
+
+/* app.use(
+  cors({
+    origin: process.env.NODE_ENV === "production" ? "" : "localhost:4444",
+    credential: true,
+  })
+); */
 
 app.use(cookieParser());
 app.use(express.json()); // needed to parse the body of the request
-app.use("/users", require("./routes/userRoutes"));
-app.use("/plans", require("./routes/planRoutes"));
+app.use("/users", require("./src/routes/userRoutes"));
+app.use("/plans", require("./src/routes/planRoutes"));
 app.get("/", (req, res) => {
   console.log("Hello from route");
 

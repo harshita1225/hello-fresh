@@ -6,12 +6,12 @@ import PaymentPage from "./components/plans/PaymentPage";
 import Homepage from "./components/homepage/Homepage";
 import PlansPage from "./components/plans/PlansPage";
 import EditPlan from "./components/plans/EditPlan";
-
 import Register from "./components/Register";
 import Login from "./components/Login";
 import MenusPage from "./components/menuspage/MenusPage";
 import Cart from "./components/plans/Cart";
 import ConfirmationPage from "./components/plans/ConfirmationPage";
+
 function App() {
   return (
     <div className="App">
