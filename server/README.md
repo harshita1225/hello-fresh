@@ -5,7 +5,6 @@ Team: Alina Cuznetov, Lesley-Ann Christl & Harshita Joshi
 ---
 
 ![homeREADME](https://user-images.githubusercontent.com/73485164/212683907-dd27e37a-9b1e-409c-abe0-1f0327e5f614.png)
-![video](../HelloFreshClone.mp4)
 
 ## Description
 
